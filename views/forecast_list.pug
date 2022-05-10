@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+    each forecast in forecast_list
+      li
+        a(href=forecast.url) #{forecast.reportDate_formatted}
+        |  #{forecast.reportTime}
+
+    else
+      li There are no forecasts.

@@ -1,0 +1,13 @@
+extends layout
+
+block content
+
+  h1 Forecast: !{data.forecast.reportDate_formatted}
+    |  (!{data.forecast.reportTime})
+  p !{data.forecast.reportName}
+
+  div(style='margin-left:20px;margin-top:20px')
+
+    h4 Synopsis: !{data.forecast.synopsis}
+    br
+    p !{data.forecast.areaForecast}
