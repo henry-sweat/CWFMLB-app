@@ -4,17 +4,18 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var config = require('./config.json');
 
 // import route modules
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var forecastsRouter = require('./routes/forecasts');
 
 // create express object
 var app = express();
 
 //Set up mongoose connection
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb+srv://admin:VSQphVWEuga2MdO1@cwfmlb.5tbvc.mongodb.net/cwfmlb?retryWrites=true&w=majority';
+var mongoDB = config.url;
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -33,7 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // use the route modules we imported above
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/forecasts', forecastsRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
